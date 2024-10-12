@@ -2,7 +2,7 @@
  * @Author: 23060306-Lei Xiao Tian leixiaotian434@gmail.com
  * @Date: 2024-09-30 09:47:07
  * @LastEditors: 23060306-Lei Xiao Tian leixiaotian434@gmail.com
- * @LastEditTime: 2024-10-03 15:22:25
+ * @LastEditTime: 2024-10-05 21:00:04
  * @FilePath: /rt-thread-am/bsp/abstract-machine/src/context.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -101,8 +101,8 @@ static void rt_hw_entry(void *arg) {
  */
 rt_uint8_t *rt_hw_stack_init(void *tentry, void *parameter, rt_uint8_t *stack_addr, void *texit) {
   // Align uintptr_t
-  rt_uint32_t stack_addr_size = (rt_uint32_t) stack_addr;
-  rt_uint32_t stack_addr_offset = stack_addr_size % (sizeof(uintptr_t) / sizeof(rt_uint8_t));
+  uintptr_t stack_addr_size = (uintptr_t) stack_addr;
+  uintptr_t stack_addr_offset = stack_addr_size % (sizeof(uintptr_t) / sizeof(rt_uint8_t));
   stack_addr = stack_addr + ((sizeof(uintptr_t) / sizeof(rt_uint8_t)) - stack_addr_offset);
 
   uintptr_t *args = (uintptr_t *)((Context *)stack_addr - 2);
